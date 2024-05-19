@@ -2,22 +2,37 @@
 #py install pymongo
 
 from pymongo import MongoClient
+from api_documentation import ApiNba
 
-# Connect to MongoDB Atlas (replace with your connection string)
-client = MongoClient("mongodb+srv://SportyPredictAdmin:Password@sportypredict.fpxpjl1.mongodb.net/")
+class MongoDB:
+    def __init__(self):
+        # Connect to MongoDB Atlas (replace with your connection string)
+        self.client = MongoClient("mongodb+srv://SportyPredictAdmin:Password@sportypredict.fpxpjl1.mongodb.net/")
 
-# Access your database
-db = client.my_database
+        # Access your database
+        self.db = self.client.my_database
 
-# Create a collection (table)
-collection = db.PlayerStats
+        # Create a collection (table)
+        self.collection = self.db.PlayerStats
 
-# Add record to see if works
-mylist = [
-    {"Name": "LeBron James", "Position": "SF", "PPG": 24.7, "APG": 6.2, "RPG": 7.4},
-    {"Name": "Stephen Curry", "Position": "PG", "PPG": 27.2, "APG": 5.8, "RPG": 2.8}
-    # Add more documents here
-]
-result = collection.insert_many(mylist)
-print(result.inserted_ids)
+         # Create an instance of the ApiNba class
+        api = ApiNba()
 
+        # Fetch player data
+        lebron_data = api.lebron()
+        steph_data = api.steph()
+        jokic_data = api.jokic()
+
+        # Add record to see if it works
+        self.players = [
+            lebron_data,
+            steph_data,
+            jokic_data
+        ]
+
+        # Ensure each record is inserted correctly and print the result
+        result = self.collection.insert_many(self.players)
+        print(result.inserted_ids)
+
+# Instantiate the MongoDB class to trigger the data insertion
+mongo_db = MongoDB()
