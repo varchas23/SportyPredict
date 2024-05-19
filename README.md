@@ -1,6 +1,6 @@
 Application that uses NBA Player Statistics to predict future outcomes. The user first selects an NBA player from a dropdown menu, then chooses a statistic to predict. Lastly, the user enters the value of the statistic and presses the 'Calculate' button to find out if the prediction could be strong.
 
-Group Members: Varchas Sharma, Devarshi Patel, Param Patel
+Group Members: Varchas Sharma, Devarshi Patel
 
 Files:
 
